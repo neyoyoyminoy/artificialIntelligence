@@ -13,12 +13,12 @@ from PyQt5.QtWidgets import (QApplication, QWidget, QLabel, QVBoxLayout, QStacke
 
 # ===================== simple manifest loader =====================
 def load_manifest():
-    manifest_path = "/home/jetson/Documents/barcodes.txt"
+    manifest_path = "/home/design25/Documents/barcodes.txt"
 
-    print("#loading manifest from documents folder...")
+    print("loading manifest from documents folder...")
 
     if not os.path.exists(manifest_path):
-        print("#manifest missing, making empty list")
+        print("manifest missing, making empty list")
         return []
 
     txt = Path(manifest_path).read_text(encoding="utf-8", errors="ignore")
@@ -60,7 +60,7 @@ class ViewOrderScreen(QWidget):
         self.grid_layout.setVerticalSpacing(5)
 
         #column headers
-        headers = ["Trailer", "Archway", "Start", "End", "Duration", "Scanned"]
+        headers = ["Trailer", "Dock Door", "Start", "End", "Duration", "Scanned"]
         for col, h in enumerate(headers):
             lbl = QLabel(h)
             lbl.setFont(QFont("Arial", 12, QFont.Bold))
@@ -76,14 +76,14 @@ class ViewOrderScreen(QWidget):
 
     def add_order(self, start_time, end_time, scanned_count):
         duration = end_time - start_time
-        archway = "Archway 1"
-        trailer = "Trailer 01"  #hardcoded placeholder for class demo
+        dockDoor = "DOOR03"
+        trailer = "A953-0624"  #hardcoded placeholder for class demo
 
         start_str = start_time.strftime("%H:%M:%S")
         end_str = end_time.strftime("%H:%M:%S")
         duration_str = str(duration).split(".")[0]
 
-        values = [trailer, archway, start_str, end_str, duration_str, str(scanned_count)]
+        values = [trailer, dockDoor, start_str, end_str, duration_str, str(scanned_count)]
 
         for col, val in enumerate(values):
             lbl = QLabel(val)
